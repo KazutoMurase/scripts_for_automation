@@ -39,6 +39,11 @@ function mouse_move() {
     sleep 2
 }
 
+function type_string() {
+    xte "str $1"
+    sleep 2
+}
+
 # Launch
 type_key "Super_L"
 type_string "line"
