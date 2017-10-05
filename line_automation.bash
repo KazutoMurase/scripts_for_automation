@@ -48,10 +48,10 @@ function type_string() {
 type_key "Super_L"
 type_string "line"
 type_key "Return"
+sleep 10
 # Login
 copy_and_paste $login_password
 type_key "Return"
-# Wait for connection
 sleep 10
 # Select user
 mouse_move $search_textbox_x $search_textbox_y
