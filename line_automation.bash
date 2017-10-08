@@ -6,8 +6,7 @@ xhost +
 login_password="password"
 username="user"
 message="message"
-search_textbox_x=500
-search_textbox_y=500
+find_app_pos="/path/to/find_app_pos.py"
 ####################################
 
 function copy_and_paste() {
@@ -49,15 +48,18 @@ type_key "Super_L"
 type_string "line"
 type_key "Return"
 sleep 10
+# Get position of the application
+result=`$find_app_pos 2>&1`
+declare -a line_pos=(`echo $result | awk -F '[^0-9]+' '{for(i=1;i<=NF;i++){if($i!="") print $i}}'`)
 # Login
 copy_and_paste $login_password
 type_key "Return"
 sleep 10
 # Select user
-mouse_move $search_textbox_x $search_textbox_y
+mouse_move $(expr ${line_pos[0]} + 70) $(expr ${line_pos[1]} + 70)
 mouse_click
 copy_and_paste $username
-mouse_move $search_textbox_x $(expr $search_textbox_y + 60)
+mouse_move $(expr ${line_pos[0]} + 70) $(expr ${line_pos[1]} + 130)
 mouse_click
 # Send message
 copy_and_paste $message
